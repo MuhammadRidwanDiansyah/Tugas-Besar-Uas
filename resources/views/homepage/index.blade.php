@@ -266,12 +266,10 @@
     <div class="col">
       <h5 class="text-center">Toko Online Menggunakan Laravel</h5>
       <p>
-        Toko adalah demo membangun toko online menggunakan laravel framework. Di dalam demo ini terdapat user bisa menginput data kategori, produk dan transaksi.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic laborum aliquam dolorum sequi nulla maiores quos incidunt veritatis numquam suscipit. Cumque dolore rem obcaecati. Eos quod ad non veritatis assumenda.
+        Membangun Toko Penjualan Handpone adalah  toko online menggunakan laravel framework. Di dalam aplikasi ini terdapat user bisa menginput data kategori, produk dan transaksi.
       </p>
       <p>
-        Toko adalah demo membangun toko online menggunakan laravel framework. Di dalam demo ini terdapat user bisa menginput data kategori, produk dan transaksi.
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic laborum aliquam dolorum sequi nulla maiores quos incidunt veritatis numquam suscipit. Cumque dolore rem obcaecati. Eos quod ad non veritatis assumenda.
+        Membangun Toko Penjualan Handpone adalah  toko online menggunakan laravel framework. Di dalam aplikasi ini terdapat user bisa menginput data kategori, produk dan transaksi.
       </p>
       <p class="text-center">
         <a href="" class="btn btn-outline-secondary">

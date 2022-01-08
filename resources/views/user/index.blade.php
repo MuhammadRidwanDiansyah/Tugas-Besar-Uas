@@ -8,15 +8,15 @@
           <div class="text-center">
             <img src="{{ asset('img/user1-128x128.jpg') }}" alt="profil" class="profile-user-img img-responsive img-circle">
           </div>
-          <h3 class="profile-username text-center">Fadlur Rohman</h3>
-          <p class="text-muted text-center">Member sejak : 20 Des 2020</p>
+          <h3 class="profile-username text-center">Muhammad Ridwan</h3>
+          <p class="text-muted text-center">Member sejak : 07 Jan 2022</p>
           <hr>
           <strong>
             <i class="fas fa-map-marker mr-2"></i>
             Alamat
           </strong>
           <p class="text-muted">
-            Jekulo, Kab Kudus
+            Batununggal, Kota Bandung
           </p>
           <hr>
           <strong>
@@ -24,7 +24,7 @@
             Email
           </strong>
           <p class="text-muted">
-            f4dlur@gmail.com
+            ridwan@gmail.com
           </p>
           <hr>
           <strong>
@@ -32,7 +32,7 @@
             No Tlp
           </strong>
           <p class="text-muted">
-            Jekulo, Kab Kudus
+            089657442830
           </p>
           <hr>
           <a href="{{ URL::to('admin/setting') }}" class="btn btn-primary btn-block">Setting</a>
