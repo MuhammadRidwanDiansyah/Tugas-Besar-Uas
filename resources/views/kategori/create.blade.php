@@ -13,7 +13,27 @@
           </div>
         </div>
         <div class="card-body">
-          <form action="#">
+          @if(count($errors) > 0)
+          @foreach($errors->all() as $error)
+              <div class="alert alert-warning">{{ $error }}</div>
+          @endforeach
+          @endif
+          @if ($message = Session::get('error'))
+              <div class="alert alert-warning">
+                  <p>{{ $message }}</p>
+              </div>
+          @endif
+          @if ($message = Session::get('success'))
+              <div class="alert alert-success">
+                  <p>{{ $message }}</p>
+              </div>
+          @endif
+          <form action="{{ route('kategori.store') }}" method='POST'>
+          @csrf
+            <div class="form-group">
+              <label for="kode_kategori">Kode Kategori</label>
+              <input type="text" name="kode_kategori" id="kode_kategori" class="form-control">
+            </div>
             <div class="form-group">
               <label for="nama_kategori">Nama Kategori</label>
               <input type="text" name="nama_kategori" id="nama_kategori" class="form-control">
@@ -23,8 +43,8 @@
               <input type="text" name="slug_kategori" id="slug_kategori" class="form-control">
             </div>
             <div class="form-group">
-              <label for="deskripsi">Deskripsi</label>
-              <textarea name="deskripsi" id="deskripsi" cols="30" rows="5" class="form-control"></textarea>
+              <label for="deskripsi_kategori">Deskripsi</label>
+              <textarea name="deskripsi_kategori" id="deskripsi_kategori" cols="30" rows="5" class="form-control"></textarea>
             </div>
             <div class="form-group">
               <button type="submit" class="btn btn-primary">Simpan</button>

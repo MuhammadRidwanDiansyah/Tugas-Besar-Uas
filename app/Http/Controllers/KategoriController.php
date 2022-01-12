@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Kategori;
 
 class KategoriController extends Controller
 {
@@ -11,10 +12,14 @@ class KategoriController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = array('title' => 'Kategori Produk');
-        return view('kategori.index', $data);
+        // Mengambil data kategori per halaman 20 data dan (paginate(20))
+        // Mengurutkan yang terakhir diiput ke paling atas (orderBy)
+        $itemkategori = Kategori::orderBy('created_at', 'desc')->paginate(20);
+        $data = array('title' => 'Kategori Produk',
+                    'itemkategori' => $itemkategori);
+        return view('kategori.index', $data)->with('no', ($request->input('page', 1) - 1) * 20);
     }
 
     /**
@@ -36,7 +41,20 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'kode_kategori' => 'required|unique:kategori',
+            'nama_kategori'=>'required',
+            'slug_kategori' => 'required',
+            'deskripsi_kategori' => 'required',
+        ]);
+        $itemuser = $request->user(); //memanggil data user yang sedang login
+        $inputan = $request->all(); //memasukkan semua variabel data yang diinput ke variabel $inputan
+        $inputan['user_id'] = $itemuser->id;
+        $inputan['slug_kategori'] = \Str::slug($request->slug_kategori); //membuat slug biar pemisahnya menjadi strip (-)
+        //slug yang digunakan nanti pas buka produk per kategori
+        $inputan['status'] = 'publish'; //status set langsung publish saja
+        $itemkategori = Kategori::create($inputan);
+        return redirect()->route('kategori.index')->with('success', 'Data kategori berhasil disimpan');
     }
 
     /**
