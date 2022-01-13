@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Produk;
+use App\Kategori;
 
 class ProdukController extends Controller
 {
@@ -11,10 +13,12 @@ class ProdukController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data = array('title' => 'Produk');
-        return view('produk.index', $data);
+        $itemproduk = Produk::orderBy('created_at', 'desc')->paginate(20);
+        $data = array('title' => 'Produk',
+                    'itemproduk' => $itemproduk);
+        return view('produk.index', $data)->with('no', ($request->input('page', 1) - 1) * 20);
     }
 
     /**
@@ -24,7 +28,9 @@ class ProdukController extends Controller
      */
     public function create()
     {
-        $data = array('title' => 'Form Produk Baru');
+        $itemkategori = Kategori::orderBy('nama_kategori', 'asc')->get();
+        $data = array('title' => 'Form Tambah Produk Baru',
+                    'itemkategori' => $itemkategori);
         return view('produk.create', $data);
     }
 
@@ -36,7 +42,24 @@ class ProdukController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'kode_produk' => 'required|unique:produk',
+            'nama_produk' => 'required',
+            'slug_produk' => 'required',
+            'deskripsi_produk' => 'required',
+            'kategori_id' => 'required',
+            'qty' => 'required|numeric',
+            'satuan' => 'required',
+            'harga' => 'required|numeric'
+        ]);
+        $itemuser = $request->user(); //ambil data user yang login
+        $slug = \Str::slug($request->slug_produk); //buat slug dari input slug produk
+        $inputan = $request->all();
+        $inputan['slug_produk'] = $slug;
+        $inputan['user_id'] = $itemuser->id;
+        $inputan['status'] = 'publish';
+        $itemproduk = Produk::create($inputan);
+        return redirect()->route('produk.index')->with('success', 'Data berhasil disimpan');
     }
 
     /**
