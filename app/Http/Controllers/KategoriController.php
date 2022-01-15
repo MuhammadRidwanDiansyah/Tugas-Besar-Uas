@@ -122,6 +122,16 @@ class KategoriController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $itemkategori = Kategori::findOrFail($id);
+        if (count(array($itemkategori->produk)) > 1) {
+            // dicek dulu, jika ada produk di dalam kategori maka proses hapus dihentikan
+            return back()->with('error', 'Hapus Dulu Produk Di Dalam Kategori Ini, Proses Dihentikan');
+        } else {
+            if ($itemkategori->delete()) {
+                return back()->with('success', 'Data berhasil dihapus');
+            } else {
+                return back()->with('error', 'Data gagal dihapus');
+            }
+        }
     }
 }
