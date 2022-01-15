@@ -82,7 +82,11 @@ class ProdukController extends Controller
      */
     public function edit($id)
     {
-        $data = array('title' => 'Form Edit Produk');
+        $itemproduk = Produk::findOrFail($id);
+        $itemkategori = Kategori::orderBy('nama_kategori', 'asc')->get();
+        $data = array('title' => 'Form Edit Produk',
+                'itemproduk' => $itemproduk,
+                'itemkategori' => $itemkategori);
         return view('produk.edit', $data);
     }
 
@@ -95,7 +99,30 @@ class ProdukController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'kode_produk' => 'required|unique:produk,id,'.$id,
+            'nama_produk' => 'required',
+            'slug_produk' => 'required',
+            'deskripsi_produk' => 'required',
+            'kategori_id' => 'required',
+            'qty' => 'required|numeric',
+            'satuan' => 'required',
+            'harga' => 'required|numeric'
+        ]);
+        $itemproduk = Produk::findOrFail($id);
+        $slug = \Str::slug($request->slug_produk); //slug digunakan nanti pas buka produk
+        // validasi , biar tidak ada slug yang sama
+        $validasislug = Produk::where('id', '!=', $id) // id-nya tidak sama dengan $id
+                                ->where('slug_produk', $slug)
+                                ->first();
+        if ($validasislug) {
+            return back()->with('error', 'Slug sudah ada, coba yang lain');
+        } else {
+            $inputan = $request->all();
+            $inputan['slug'] = $slug;
+            $itemproduk->update($inputan);
+            return redirect()->route('produk.index')->with('success', 'Data berhasil Di Update');
+        }
     }
 
     /**
