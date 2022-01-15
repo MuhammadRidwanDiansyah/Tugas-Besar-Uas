@@ -133,6 +133,11 @@ class ProdukController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $itemproduk = Produk::findOrFail($id);
+        if ($itemproduk->delete()) {
+            return back()->with('success', 'Data Berhasil Dihapus');
+        } else {
+            return back()->with('error', 'Data Gagal Dihapus');
+        }
     }
 }
