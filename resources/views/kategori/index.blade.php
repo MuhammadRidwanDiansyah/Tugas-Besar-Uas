@@ -75,7 +75,7 @@
                   {{ $kategori->nama_kategori }}
                   </td>
                   <td>
-                  {{ count($kategori->produk) }} Produk
+                  {{ count(array ($kategori->produk)) }} Produk
                   </td>
                   <td>
                   {{ $kategori->status }}
