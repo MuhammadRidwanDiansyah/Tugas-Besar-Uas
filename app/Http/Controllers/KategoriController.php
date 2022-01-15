@@ -76,7 +76,10 @@ class KategoriController extends Controller
      */
     public function edit($id)
     {
-        $data = array('title' => 'Form Edit Kategori');
+        $itemkategori = Kategori::findOrFail($id); //mencari berdasarkan id = $id, 
+        // kalo ga ada, error page not found 404
+        $data = array('title' => 'Form Edit Kategori',
+                    'itemkategori' => $itemkategori);
         return view('kategori.edit', $data);
     }
 
@@ -89,7 +92,26 @@ class KategoriController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'nama_kategori'=>'required',
+            'slug_kategori' => 'required',
+            'deskripsi_kategori' => 'required',
+        ]);
+        $itemkategori = Kategori::findOrFail($id);
+        // kalo ga ada, error page not found 404
+        $slug = \Str::slug($request->slug_kategori); //slug ketika digunakan nanti pas buka produk per kategori
+        // validasi, biar tidak ada slug yang sama
+        $validasislug = Kategori::where('id', '!=', $id) //yang id-nya tidak sama dengan $id
+                                ->where('slug_kategori', $slug)
+                                ->first();
+        if ($validasislug) {
+            return back()->with('error', 'Slug sudah ada, Coba yang lain');
+        } else {
+            $inputan = $request->all();
+            $inputan['slug'] = $slug;
+            $itemkategori->update($inputan);
+            return redirect()->route('kategori.index')->with('success', 'Data Berhasil Diubah');
+        }
     }
 
     /**
