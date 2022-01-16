@@ -142,4 +142,54 @@ class ProdukController extends Controller
             return back()->with('error', 'Data Gagal Dihapus');
         }
     }
+
+    public function uploadimage(Request $request) {
+        $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'produk_id' => 'required',
+        ]);
+        $itemuser = $request->user();
+        $itemproduk = Produk::where('user_id', $itemuser->id)
+                                ->where('id', $request->produk_id)
+                                ->first();
+        if ($itemproduk) {
+            $fileupload = $request->file('image');
+            $folder = 'assets/images';
+            $itemgambar = (new ImageController)->upload($fileupload, $itemuser, $folder);
+            // simpan ke table produk_images
+            $inputan = $request->all();
+            $inputan['foto'] = $itemgambar->url; //mengambil url file yang barusan diupload
+            // simpan ke produk image
+            \App\ProdukImage::create($inputan);
+            // update banner produk
+            $itemproduk->update(['foto' => $itemgambar->url]);
+            // end update banner produk
+            return back()->with('success', 'Image Berhasil Diupload');
+        } else {
+            return back()->with('error', 'Kategori Tidak Ditemukan');
+        }
+    }
+
+    public function deleteimage(Request $request, $id) {
+        // ambil data produk image by id
+        $itemprodukimage = \App\ProdukImage::findOrFail($id);
+        $itemproduk = Produk::findOrFail($itemprodukimage->produk_id);
+        // cari database berdasarkan url gambar
+        $itemgambar = \App\Image::where('url', $itemprodukimage->foto)->first();
+        // hapus imagenya
+        if ($itemgambar) {
+            \Storage::delete($itemgambar->url);
+            $itemgambar->delete();
+        }
+        // baru update hapus produk image
+        $itemprodukimage->delete();
+        $itemsisaprodukimage = \App\ProdukImage::where('produk_id', $itemproduk->id)->first();
+        if ($itemsisaprodukimage) {
+            $itemproduk->update(['foto' => $itemsisaprodukimage->foto]);
+        } else {
+            $itemproduk->update(['foto' => null]);
+        }
+        //end update jadi banner produk
+        return back()->with('success', 'Data Berhasil Dihapus');
+    }
 }
