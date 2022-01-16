@@ -70,7 +70,9 @@ class ProdukController extends Controller
      */
     public function show($id)
     {
-        $data = array('title' => 'Foto Produk');
+        $itemproduk = Produk::findOrFail($id);
+        $data = array('title' => 'Foto Produk',
+                'itemproduk' => $itemproduk);
         return view('produk.show', $data);
     }
 
