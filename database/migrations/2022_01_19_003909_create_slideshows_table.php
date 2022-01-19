@@ -13,8 +13,13 @@ class CreateSlideshowsTable extends Migration
      */
     public function up()
     {
-        Schema::create('slideshows', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('slideshow', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('foto');
+            $table->string('caption_title')->nullable();
+            $table->string('caption_content')->nullable();
+            $table->integer('user_id')->unsigned();
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -26,6 +31,6 @@ class CreateSlideshowsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('slideshows');
+        Schema::dropIfExists('slideshow');
     }
 }
