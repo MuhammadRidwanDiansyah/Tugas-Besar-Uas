@@ -19,9 +19,9 @@ Route::get('/', 'HomepageController@index');
 Route::get('/about', 'HomepageController@about');
 Route::get('/kontak', 'HomepageController@kontak');
 Route::get('/kategori', 'HomepageController@kategori');
-Route::get('/kategori/{slug}', 'HomepageController@produkperkategori');
+Route::get('/kategori/{slug}', 'HomepageController@kategoribyslug');
 Route::get('/produk', 'HomepageController@produk');
-Route::get('/produk/{slug}', 'HomepageController@produkdetail');
+Route::get('/produk/{id}', 'HomepageController@produkdetail');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
   Route::get('/', 'DashboardController@index');
