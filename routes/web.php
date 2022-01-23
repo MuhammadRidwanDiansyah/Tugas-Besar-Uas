@@ -23,19 +23,20 @@ Route::get('/kategori/{slug}', 'HomepageController@kategoribyslug');
 Route::get('/produk', 'HomepageController@produk');
 Route::get('/produk/{id}', 'HomepageController@produkdetail');
 
+// route dashboard
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
   Route::get('/', 'DashboardController@index');
   // route kategori
   Route::resource('kategori', 'KategoriController');
   // route produk
   Route::resource('produk', 'ProdukController');
-  // route customer
+  // route data customer
   Route::resource('customer', 'CustomerController');
   // route transaksi
   Route::resource('transaksi', 'TransaksiController');
-  // profil
+  // route profil
   Route::get('profil', 'UserController@index');
-  // setting profil
+  // route setting profil
   Route::get('setting', 'UserController@setting');
   // form laporan
   Route::get('laporan', 'LaporanController@index');
@@ -55,14 +56,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
   Route::post('produkimage', 'ProdukController@uploadimage');
   // hapus image produk
   Route::delete('produkimage/{id}', 'ProdukController@deleteimage');
-   // slideshow
-   Route::resource('slideshow', 'SlideshowController');
-   // produk promo
+  // slideshow
+  Route::resource('slideshow', 'SlideshowController');
+  // produk promo
   Route::resource('promo', 'ProdukPromoController');
   // load async produk
   Route::get('loadprodukasync/{id}', 'ProdukController@loadasync');
+  // wishlist
+  Route::resource('wishlist', 'WishlistController');
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+// ubah route ke home menjadi admin
+Route::get('/home', function() {
+  return redirect('/admin');
+});
