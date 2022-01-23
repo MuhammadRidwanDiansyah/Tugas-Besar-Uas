@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
 use Illuminate\Http\Request;
+use App\Cart;
 
 class CartController extends Controller
 {
@@ -12,9 +12,15 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $itemuser = $request->user(); //ambil data user
+        $itemcart = Cart::where('user_id', $itemuser->id)
+                        ->where('status_cart', 'cart')
+                        ->first();
+        $data = array('title' => 'Shopping Cart',
+                    'itemcart' => $itemcart);
+        return view('cart.index', $data)->with('no', 1);
     }
 
     /**
@@ -41,10 +47,10 @@ class CartController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Cart  $cart
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Cart $cart)
+    public function show($id)
     {
         //
     }
@@ -52,10 +58,10 @@ class CartController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Cart  $cart
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Cart $cart)
+    public function edit($id)
     {
         //
     }
@@ -64,10 +70,10 @@ class CartController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Cart  $cart
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Cart $cart)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -75,11 +81,18 @@ class CartController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Cart  $cart
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Cart $cart)
+    public function destroy($id)
     {
         //
+    }
+
+    public function kosongkan($id) {
+        $itemcart = Cart::findOrFail($id);
+        $itemcart->detail()->delete(); //hapus semua item di cart detail
+        $itemcart->updatetotal($itemcart, '-'.$itemcart->subtotal);
+        return back()->with('success', 'Cart berhasil dikosongkan');
     }
 }
