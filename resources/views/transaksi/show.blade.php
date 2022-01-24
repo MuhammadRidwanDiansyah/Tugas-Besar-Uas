@@ -36,7 +36,7 @@
                 <tr>
                   <td>1</td>
                   <td>KATE-1</td>
-                  <td>Baju Anak</td>
+                  <td>Redmi Note 10</td>
                   <td class="text-right">15.000</td>
                   <td class="text-right">2</td>
                   <td class="text-right">30.000</td>
@@ -44,7 +44,7 @@
                 <tr>
                   <td>2</td>
                   <td>KATE-2</td>
-                  <td>Baju Anak</td>
+                  <td>Samsung Galaxy</td>
                   <td class="text-right">25.000</td>
                   <td class="text-right">2</td>
                   <td class="text-right">50.000</td>
@@ -52,7 +52,7 @@
                 <tr>
                   <td>3</td>
                   <td>KATE-3</td>
-                  <td>Baju Anak</td>
+                  <td>Realme C20</td>
                   <td class="text-right">35.000</td>
                   <td class="text-right">2</td>
                   <td class="text-right">70.000</td>

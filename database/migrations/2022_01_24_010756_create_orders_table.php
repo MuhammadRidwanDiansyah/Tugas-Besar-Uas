@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAlamatPengirimenTable extends Migration
+class CreateOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateAlamatPengirimenTable extends Migration
      */
     public function up()
     {
-        Schema::create('alamat_pengiriman', function (Blueprint $table) {
+        Schema::create('order', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
-            $table->string('status');//utama atau tidak
+            $table->integer('cart_id')->unsigned();
             $table->string('nama_penerima');
             $table->string('no_tlp');
             $table->text('alamat');
@@ -25,7 +24,7 @@ class CreateAlamatPengirimenTable extends Migration
             $table->string('kecamatan');
             $table->string('kelurahan');
             $table->string('kodepos');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('cart_id')->references('id')->on('cart');
             $table->timestamps();
         });
     }
@@ -37,6 +36,6 @@ class CreateAlamatPengirimenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('alamat_pengiriman');
+        Schema::dropIfExists('order');
     }
 }
