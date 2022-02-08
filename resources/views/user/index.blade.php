@@ -38,7 +38,7 @@
           <a href="{{ URL::to('admin/setting') }}" class="btn btn-primary btn-block">Setting</a>
         </div>
       </div>      
-    </div>
+ <!--    </div>
     <div class="col col-lg-8 col-md-8">
       <div class="card card-primary card-outline">
         <div class="card-header">
@@ -220,8 +220,8 @@
             </table>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
+      </div> -->
+    </div> 
+  </div> 
+</div> 
 @endsection

@@ -149,10 +149,11 @@
     <div class="col">
       <h5 class="text-center">Aplikasi Penjualan Handphone Menggunakan Laravel</h5>
       <p>
-        Membangun Toko Penjualan Handpone adalah toko online menggunakan laravel framework. Di dalam aplikasi ini terdapat user bisa menginput data kategori, produk dan transaksi.
+        Aplikasi Penjualan Handphone Berbasis Web adalah sebuah aplikasi yang digunakan untuk memudahkan dalam transaksi penjualan secara online.
       </p>
       <p>
-        Membangun Toko Penjualan Handpone adalah toko online menggunakan laravel framework. Di dalam aplikasi ini terdapat user bisa menginput data kategori, produk dan transaksi.
+        Aplikasi ini dilengkapi dengan fitur login multi user, registrasi user, katalog produk, pencarian produk, keranjang belanja, halaman checkout, halaman status belanjaan dan lain sebagainya.
+        dapat menangani perubahan yang terjadi, seperti perubahan harga, penambahan jenis handphone.
       </p>
       <p class="text-center">
         <a href="" class="btn btn-outline-secondary">

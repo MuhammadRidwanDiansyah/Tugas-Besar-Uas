@@ -70,7 +70,7 @@
                   {{ $produk->nama_produk }}
                   </td>
                   <td>
-                  {{ $produk->qty }} {{ $produk->satuan }}
+                  {{ $produk->qty }}
                   </td>
                   <td>
                   {{ number_format($produk->harga, 2) }}

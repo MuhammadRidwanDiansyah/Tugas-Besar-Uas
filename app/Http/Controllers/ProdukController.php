@@ -145,7 +145,7 @@ class ProdukController extends Controller
 
     public function uploadimage(Request $request) {
         $this->validate($request, [
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'required|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'produk_id' => 'required',
         ]);
         $itemuser = $request->user();

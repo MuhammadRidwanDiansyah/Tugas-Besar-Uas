@@ -74,8 +74,8 @@
               <tr>
                 <th>No</th>
                 <th>Kode</th>
-                <th>Nama</th>
                 <th>Kategori</th>
+                <th>Produk</th>
                 <th>Qty</th>
                 <th>Harga</th>
               </tr>
@@ -83,27 +83,35 @@
             <tbody>
               <tr>
                 <td>1</td>
-                <td>PRO-1</td>
+                <td>R-001</td>
                 <td>Realme</td>
-                <td>Realme C12</td>
-                <td>12</td>
-                <td>5.000</td>
+                <td>Realme C20</td>
+                <td>100</td>
+                <td>1.500.000</td>
               </tr>
               <tr>
                 <td>2</td>
-                <td>PRO-2</td>
-                <td>Realme</td>
-                <td>Realme C11</td>
-                <td>20</td>
-                <td>25.000</td>
+                <td>X-001</td>
+                <td>Redmi</td>
+                <td>Redmi 10</td>
+                <td>100</td>
+                <td>1.700.000</td>
               </tr>
               <tr>
                 <td>3</td>
-                <td>PRO-3</td>
+                <td>R-001</td>
                 <td>Realme</td>
                 <td>Realme C3</td>
                 <td>20</td>
                 <td>125.000</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>X-002</td>
+                <td>Redmi</td>
+                <td>Redmi Note 10s</td>
+                <td>100</td>
+                <td>2.999.000</td>
               </tr>
             </tbody>
           </table>
